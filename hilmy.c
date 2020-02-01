@@ -1,11 +1,24 @@
 #include "hilmy.h"
 
+void TampilkanStats(Stats* S){
+    printf("\n=== Statistik Hilmy ===\n");
+    printf("Health    %d\nHygiene   %d\n", Hlt(*S),Hyg(*S));
+    printf("Social    %d\nHappiness %d\n", Soc(*S),Hpy(*S));
+    printf("Money     %d\n", Mny(*S));
+    printf("Skor sekarang : %d\n",skor(*S));
+}
+
 void StartStats(Stats* S){
     Hlt(*S) = 100;
     Hpy(*S) = 50;
     Soc(*S) = 50;
     Hyg(*S) = 100;
     Mny(*S) = 0;
+    skor(*S) = 0;
+}
+
+void TbhSkor(Stats* S, int k){
+    skor(*S) += k;
 }
 
 void KurangHlt(Stats* S, int W){
@@ -23,18 +36,17 @@ void Makan(Stats* S){
     }
     Mny(*S) -= 5;
     KurangHlt(S, 5);
+    TbhSkor(S, 3);
 }
 
 void Kerja(Stats* S){
-    Hpy(*S) -= 20;
+    Hpy(*S) -= 10;
     if (Hpy(*S) < 0){
         Hpy(*S) = 0;
     }
     Mny(*S) += 30;
-    if (Mny(*S) > 100){
-        Mny(*S) = 100;
-    }
     KurangHlt(S, 15);
+    TbhSkor(S, 5);
 }
 
 void Nongkrong(Stats* S){
@@ -52,6 +64,7 @@ void Nongkrong(Stats* S){
     }
     Mny(*S) -= 5;
     KurangHlt(S,5);
+    TbhSkor(S, 3);
 }
 
 void MainHP(Stats* S){
@@ -69,6 +82,7 @@ void MainHP(Stats* S){
     }
     Mny(*S) -= 5;
     KurangHlt(S,10);
+    TbhSkor(S, 2);
 }
 
 void Mandi(Stats* S){
@@ -82,6 +96,7 @@ void Mandi(Stats* S){
     }
     Mny(*S) -= 5;
     KurangHlt(S,5);
+    TbhSkor(S, 4);
 }
 
 void Olahraga(Stats* S){
@@ -99,6 +114,7 @@ void Olahraga(Stats* S){
     }
     Mny(*S) -= 15;
     KurangHlt(S,10);
+    TbhSkor(S, 4);
 }
 
 void Belanja(Stats* S){
@@ -110,8 +126,9 @@ void Belanja(Stats* S){
     if (Hpy(*S) > 100){
         Hpy(*S) = 100;
     }
-    Mny(*S) -= 30;
+    Mny(*S) -= 40;
     KurangHlt(S,10);
+    TbhSkor(S, 5);
 }
 
 void MainBG(Stats* S){
@@ -129,6 +146,7 @@ void MainBG(Stats* S){
     }
     Mny(*S) -= 10;
     KurangHlt(S,5);
+    TbhSkor(S, 2);
 }
 
 void Nonton(Stats* S){
@@ -142,6 +160,7 @@ void Nonton(Stats* S){
     }
     Mny(*S) -= 10;
     KurangHlt(S, 5);
+    TbhSkor(S, 4);
 }
 
 void Bersih(Stats* S){
@@ -159,4 +178,5 @@ void Bersih(Stats* S){
     }
     Mny(*S) -= 5;
     KurangHlt(S, 5);
+    TbhSkor(S, 4);
 }
